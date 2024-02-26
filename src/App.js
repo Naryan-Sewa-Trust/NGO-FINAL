@@ -9,6 +9,8 @@ import { Routes, Route } from "react-router-dom";
 import PaymentSuccess from "./components/PaymentSuccess.js";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import LearnMore from "./components/LearnMore";
+import Login from "./components/admin/Login.js";
+import AdminPage from "./components/admin/Admin.js";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/paymentsuccess" element={<PaymentSuccess />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/learnmore" element={<LearnMore />} />
+        <Route path="/adminLogin" element={<Login />} />
+        <Route path="/adminPayment" element={<AdminPage />} />
       </Routes>
     </div>
   );

@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { default as Razorpay } from "razorpay";
 import crypto from "crypto";
-import PDFDocument from "pdfkit"; // Import PDFKit for PDF generation
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer"; // Import nodemailer for sending emails
 
 dotenv.config();
@@ -23,6 +24,83 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
+
+// Define admin schema
+const adminSchema = new mongoose.Schema({
+  username: { type: String, unique: true },
+  password: String,
+  isAdmin: { type: Boolean, default: false },
+});
+
+const Admin = mongoose.model("Admin", adminSchema);
+
+// Registration endpoint
+app.post("/register", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create new admin with isAdmin set to true
+    const admin = await Admin.create({
+      username,
+      password: hashedPassword,
+      isAdmin: true,
+    });
+
+    res.status(201).json({ message: "Admin registered successfully", admin });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Admin login route
+app.post("/admin/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  // Find admin by username
+  const admin = await Admin.findOne({ username });
+
+  if (!admin) {
+    return res.status(404).json({ message: "Admin not found" });
+  }
+
+  // Compare passwords
+  const isMatch = bcrypt.compare(password, admin.password);
+
+  if (!isMatch) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  // Ensure the user is an admin
+  if (!admin.isAdmin) {
+    return res.status(401).json({ message: "User is not an admin" });
+  }
+  // Generate JWT token with a longer expiration time (e.g., 1 day)
+  const token = jwt.sign({ adminId: admin._id }, process.env.JWT_SECRET, {
+    expiresIn: "1d", // Token expires in 1 day
+  });
+  res.json({ token, isAdmin: true });
+});
+
+// Middleware to authenticate admin
+const authMiddleware = (req, res, next) => {
+  const token = req.headers.authorization;
+  // console.log(token);
+
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.adminId = decoded.adminId;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Invalid token" });
+  }
+};
 
 const instance = new Razorpay({
   key_id: process.env.KEY,
@@ -200,7 +278,17 @@ Narayan Sewa Trust
   }
 });
 
-app.get("/api/getkey", (req, res) => {
+// Protected route to fetch payments (requires authentication)
+app.get("/admin/payments", authMiddleware, async (req, res) => {
+  try {
+    const payments = await Payment.find();
+    res.status(200).json({ success: true, payments });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+app.get("/api/getkey", async (req, res) => {
   return res.status(200).json({ key: process.env.KEY });
 });
 
