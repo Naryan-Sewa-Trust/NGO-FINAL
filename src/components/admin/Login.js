@@ -149,7 +149,10 @@ function AdminLoginPage() {
                   Admin Login
                 </p>
 
-                <form onSubmit={handleSubmit}>
+                <form
+                  onSubmit={handleSubmit}
+                  className="d-flex flex-column gap-3"
+                >
                   <div className="d-flex flex-row align-items-center mb-4">
                     <MDBIcon fas icon="user" className="me-3 " size="lg" />
                     <MDBInput
@@ -173,9 +176,10 @@ function AdminLoginPage() {
                     />
                   </div>
 
-                  <MDBBtn type="submit" className="mb-4" size="lg">
+                  <button className="bg-primary p-2 mb-4 rounded text-white border-white shadow-lg">
                     Login
-                  </MDBBtn>
+                  </button>
+                  <p>Copyright © Narayan Sewa Trust</p>
                 </form>
               </MDBCol>
             </MDBCardBody>
