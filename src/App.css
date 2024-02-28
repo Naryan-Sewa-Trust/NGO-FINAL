@@ -122,3 +122,8 @@ header {
   height: 100%;
   /* Ensures the image takes up the full height of its container */
 }
+
+.hover-class:hover {
+  background-color: white;
+  transition-duration: 300;
+}

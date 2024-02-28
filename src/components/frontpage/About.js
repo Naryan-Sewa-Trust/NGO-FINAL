@@ -33,7 +33,7 @@ function About() {
                 data-aos="fade"
               >
                 <iframe
-                  src="https://player.vimeo.com/video/45830194"
+                  src="/images/video.mp4"
                   frameborder="0"
                   allow="autoplay; fullscreen"
                   allowfullscreen
