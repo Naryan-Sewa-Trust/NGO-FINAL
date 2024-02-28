@@ -15,7 +15,7 @@ function Footer() {
             <div className="col-lg-6 col-md-6">
               <div className="d-flex justify-content-center align-content-center">
                 <img
-                  src="img/logo.jpeg"
+                  src="img/logo.jpg"
                   className=" rounded-circle mb-4 me-3"
                   width={50}
                 />
