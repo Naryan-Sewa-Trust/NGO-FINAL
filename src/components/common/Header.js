@@ -110,11 +110,16 @@ function Header(props) {
         </nav>
 
         <nav
-          className="navbar navbar-expand-lg navbar-dark py-lg-0 px-lg-5 wow fadeIn"
+          className="navbar mt-1 navbar-expand-lg navbar-dark py-lg-0 px-lg-5 wow fadeIn"
           data-wow-delay="0.1s"
         >
           <Link to="/" className="navbar-brand ms-4 ms-lg-0">
             <h1 className="fw-bold text-primary ">
+              <img
+                src="img/logo.jpg"
+                className="rounded-circle mb-4 me-3 d-none d-sm-inline-block"
+                width={50}
+              />
               Narayan<span className="text-white">SewaTrust</span>
             </h1>
           </Link>

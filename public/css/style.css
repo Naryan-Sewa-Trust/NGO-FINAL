@@ -656,3 +656,7 @@
 .side-navbar-links a:hover {
   color: #ffc107;
 }
+
+.carousel-item {
+  transition: transform 0.9s ease;
+}

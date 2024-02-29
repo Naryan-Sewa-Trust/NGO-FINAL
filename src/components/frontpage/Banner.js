@@ -4,8 +4,8 @@ function Banner() {
   return (
     <div className="container-fluid p-0">
       <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
-        <Carousel>
-          <Carousel.Item>
+        <Carousel interval={4000}>
+          <Carousel.Item style={{ height: "80vh" }}>
             <img
               className="d-block object-cover"
               style={{ objectFit: "cover", width: "100%", height: "90vh" }}
@@ -15,7 +15,7 @@ function Banner() {
             <Carousel.Caption>
               <div className="row justify-content-center px-4">
                 <div className="col-lg-7 pt-5">
-                  <h1 className="display-4 text-white mb-3 animated slideInDown">
+                  <h1 className="display-4 text-white mb-3 pt-3">
                     Let's Change The World With Humanity
                   </h1>
                   <p className="fs-5 text-white-50 mb-5 animated slideInDown">
@@ -24,7 +24,7 @@ function Banner() {
                     all.
                   </p>
                   <Link
-                    className="btn btn-primary py-2 px-3 animated slideInDown"
+                    className="btn btn-primary py-2 px-3 animated slideInDown mb-4"
                     to="/learnmore"
                     state={{
                       title: "Let's Change The World With Humanity",
@@ -40,17 +40,17 @@ function Banner() {
               </div>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item>
+          <Carousel.Item style={{ height: "80vh" }}>
             <img
               className="d-block object-cover "
-              style={{ objectFit: "cover", width: "100%", height: "90vh" }}
+              style={{ objectFit: "cover", width: "100%", height: "80vh" }}
               src="img/carousel-2.jpg"
               alt="Second slide"
             />
             <Carousel.Caption>
               <div className="row justify-content-center px-4">
                 <div className="col-lg-7 pt-5">
-                  <h1 className="display-4 text-white mb-3 animated slideInDown">
+                  <h1 className="display-4 text-white mb-3 pt-3">
                     Let's Save More Lives With Our Helping Hand
                   </h1>
                   <p className="fs-5 text-white-50 mb-5 animated slideInDown">
