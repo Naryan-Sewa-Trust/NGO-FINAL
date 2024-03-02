@@ -85,7 +85,9 @@ function AdminLoginPage() {
     e.preventDefault();
 
     try {
-      // const response = await axios.post("http://localhost:8000/admin/login", {
+      // const response = await axios.post(
+      //   "http://localhost:8000/admin/login",
+      //   {
       const response = await axios.post(
         "https://ngofinalbackend.vercel.app/admin/login",
         {
@@ -94,8 +96,6 @@ function AdminLoginPage() {
         },
         {
           headers: {
-            "x-device-id": "stuff",
-            "Content-Type": "multipart/form-data",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers":
               "Origin, X-Requested-With, Content-Type, Accept ",

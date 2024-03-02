@@ -1,4 +1,5 @@
 import express from "express";
+import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
@@ -11,6 +12,8 @@ import nodemailer from "nodemailer"; // Import nodemailer for sending emails
 dotenv.config();
 
 const app = express();
+// Middleware to parse JSON bodies
+app.use(bodyParser.json());
 
 // app.use(
 //   cors({
@@ -72,6 +75,8 @@ app.post("/register", async (req, res) => {
 // Admin login route
 app.post("/admin/login", async (req, res) => {
   const { username, password } = req.body;
+  console.log(req.body);
+  // console.log(username, password);
 
   // Find admin by username
   const admin = await Admin.findOne({ username });
