@@ -2,10 +2,10 @@ import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 function Banner() {
   return (
-    <div className="container-fluid p-0">
+    <div className="container-fluid p-0 " style={{ height: "90vh" }}>
       <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
         <Carousel interval={4000}>
-          <Carousel.Item style={{ height: "80vh" }}>
+          <Carousel.Item style={{ height: "90vh" }}>
             <img
               className="d-block object-cover"
               style={{ objectFit: "cover", width: "100%", height: "90vh" }}
@@ -14,8 +14,8 @@ function Banner() {
             />
             <Carousel.Caption>
               <div className="row justify-content-center px-4">
-                <div className="col-lg-7 pt-5">
-                  <h1 className="display-4 text-white mb-3 pt-3">
+                <div className="col-lg-7 pt-lg-5 pt-3">
+                  <h1 className="display-4 text-white mb-3 pt-lg-5 pt-1">
                     Let's Change The World With Humanity
                   </h1>
                   <p className="fs-5 text-white-50 mb-5 animated slideInDown">
@@ -40,17 +40,17 @@ function Banner() {
               </div>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item style={{ height: "80vh" }}>
+          <Carousel.Item style={{ height: "90vh" }}>
             <img
               className="d-block object-cover "
-              style={{ objectFit: "cover", width: "100%", height: "80vh" }}
+              style={{ objectFit: "cover", width: "100%", height: "90vh" }}
               src="img/carousel-2.jpg"
               alt="Second slide"
             />
             <Carousel.Caption>
               <div className="row justify-content-center px-4">
-                <div className="col-lg-7 pt-5">
-                  <h1 className="display-4 text-white mb-3 pt-3">
+                <div className="col-lg-7 pt-lg-5 pt-3">
+                  <h1 className="display-4 text-white mb-3 pt-lg-5 pt-1">
                     Let's Save More Lives With Our Helping Hand
                   </h1>
                   <p className="fs-5 text-white-50 mb-5 animated slideInDown">

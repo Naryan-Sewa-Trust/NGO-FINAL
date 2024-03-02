@@ -25,6 +25,13 @@ mongoose
     console.log(error);
   });
 
+const db = mongoose.connection;
+
+app.get("/dbStatus", (req, res) => {
+  let status = db.readyState ? "Connected" : "Disconnected";
+  res.send(`Database is currently: ${status} and ${process.env.MONGODB}`);
+});
+
 // Define admin schema
 const adminSchema = new mongoose.Schema({
   username: { type: String, unique: true },
