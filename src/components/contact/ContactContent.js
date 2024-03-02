@@ -41,8 +41,8 @@ function ContactContent() {
                   <ul class=" pl-3 text-start">
                     <li class="mb-2">
                       Email:{" "}
-                      <a href="mailto:info@ngoforlife.com">
-                        info@ngoforlife.com
+                      <a href="mailto:narayansewatrust2002@gmail.com">
+                        narayansewatrust2002@gmail.com
                       </a>
                     </li>
                     <li class="mb-2">

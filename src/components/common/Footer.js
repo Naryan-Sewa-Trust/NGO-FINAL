@@ -55,7 +55,8 @@ function Footer() {
                 <i className="fa fa-phone-alt me-3"></i>+91-9718905221
               </p>
               <p>
-                <i className="fa fa-envelope me-3"></i>info@ngoforlife.com
+                <i className="fa fa-envelope me-3"></i>
+                narayansewatrust2002@gmail.com
               </p>
             </div>
             <div

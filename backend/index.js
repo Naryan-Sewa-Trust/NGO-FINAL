@@ -269,7 +269,8 @@ Narayan Sewa Trust
     });
 
     res.redirect(
-      `http://localhost:3000/paymentsuccess?reference=${razorpay_payment_id}`
+      `https://narayansewatrust.in/paymentsuccess?reference=${razorpay_payment_id}`
+      // `http://localhost:3000/paymentsuccess?reference=${razorpay_payment_id}`
     );
   } else {
     // If authentication fails, delete the document corresponding to the razorpay_order_id
