@@ -72,7 +72,6 @@ import {
   MDBCardBody,
   MDBCol,
   MDBInput,
-  MDBBtn,
   MDBIcon,
 } from "mdb-react-ui-kit"; // Import necessary components from MDBReactUIKit
 
@@ -92,6 +91,17 @@ function AdminLoginPage() {
         {
           username,
           password,
+        },
+        {
+          headers: {
+            "x-device-id": "stuff",
+            "Content-Type": "multipart/form-data",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers":
+              "Origin, X-Requested-With, Content-Type, Accept ",
+            "Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS, DELETE",
+            "Access-Control-Max-Age": 3600,
+          },
         }
       );
 

@@ -21,12 +21,6 @@ function AdminPage() {
     fetchPayments();
   }, []);
 
-  const fadeInProps = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: { duration: 1000 },
-  });
-
   return (
     <div
       className="d-flex flex-column gap-4 "

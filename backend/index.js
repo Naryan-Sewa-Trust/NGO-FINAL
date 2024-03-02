@@ -12,6 +12,11 @@ dotenv.config();
 
 const app = express();
 
+// app.use(
+//   cors({
+//     origin: "https://www.narayansewatrust.in",
+//   })
+// );
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -29,7 +34,9 @@ const db = mongoose.connection;
 
 app.get("/dbStatus", (req, res) => {
   let status = db.readyState ? "Connected" : "Disconnected";
-  res.send(`Database is currently: ${status} and ${process.env.MONGODB}`);
+  res.send(
+    `Database is currently: ${status} and ${process.env.MONGODB} and  ${process.env.JWT_SECRET}`
+  );
 });
 
 // Define admin schema
