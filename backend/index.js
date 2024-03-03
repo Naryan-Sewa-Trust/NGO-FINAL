@@ -38,9 +38,28 @@ const db = mongoose.connection;
 app.get("/dbStatus", (req, res) => {
   let status = db.readyState ? "Connected" : "Disconnected";
   res.send(
-    `Database is currently: ${status} and ${process.env.MONGODB} and  ${process.env.JWT_SECRET}`
+    `Database is currently: ${status} `
+    // `Database is currently: ${status} and ${process.env.MONGODB} and  ${process.env.JWT_SECRET}`
   );
 });
+
+// Middleware to authenticate admin
+const authMiddleware = (req, res, next) => {
+  const token = req.headers.authorization;
+  // console.log(token);
+
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.adminId = decoded.adminId;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Invalid token" });
+  }
+};
 
 // Define admin schema
 const adminSchema = new mongoose.Schema({
@@ -69,6 +88,29 @@ app.post("/register", async (req, res) => {
     res.status(201).json({ message: "Admin registered successfully", admin });
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+});
+
+// Add /admin/profile route
+app.put("/admin/profile", authMiddleware, async (req, res) => {
+  try {
+    // Get the new username and password from the request body
+    const { username, password } = req.body;
+
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Update the admin's username and password in the database
+    await Admin.updateOne(
+      { _id: req.adminId },
+      { username, password: hashedPassword }
+    );
+
+    // Send a response back to the client
+    res.status(200).json({ message: "Profile updated successfully" });
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ message: "Error updating profile" });
   }
 });
 
@@ -102,24 +144,6 @@ app.post("/admin/login", async (req, res) => {
   });
   res.json({ token, isAdmin: true });
 });
-
-// Middleware to authenticate admin
-const authMiddleware = (req, res, next) => {
-  const token = req.headers.authorization;
-  // console.log(token);
-
-  if (!token) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.adminId = decoded.adminId;
-    next();
-  } catch (error) {
-    res.status(401).json({ message: "Invalid token" });
-  }
-};
 
 const instance = new Razorpay({
   key_id: process.env.KEY,

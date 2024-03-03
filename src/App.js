@@ -11,10 +11,13 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import LearnMore from "./components/LearnMore";
 import Login from "./components/admin/Login.js";
 import AdminPage from "./components/admin/Admin.js";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <div className="App">
+      <ToastContainer limit={1} position="bottom-center" />
       <Routes>
         <Route path="/" element={<FrontPage />} />
         <Route path="/causes" element={<Causes />} />
