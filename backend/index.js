@@ -21,7 +21,12 @@ app.use(bodyParser.json());
 //   })
 // );
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: "https://www.narayansewatrust.in", // replace with the origin of your client app
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
