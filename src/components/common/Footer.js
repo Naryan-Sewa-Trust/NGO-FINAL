@@ -29,6 +29,11 @@ function Footer() {
                 aiming to break the cycle of poverty and empower them for a
                 brighter future.
               </p>
+
+              <div className="d-flex gap-5 justify-content-center align-content-center">
+                <p>Registration No: 1093/2019 </p>
+                <p>Pan No: AADTN3417F</p>
+              </div>
               <div className="d-flex pt-2 justify-content-center">
                 <a className="btn btn-square me-1" href="/">
                   <i className="fab fa-twitter"></i>
