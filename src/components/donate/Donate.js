@@ -94,8 +94,8 @@ function Donate() {
   };
 
   return (
-    <div className="container-fluid donate my-0 py-5" data-parallax="scroll">
-      <div className="container py-5">
+    <div className="container-fluid donate my-0 mt-5" data-parallax="scroll">
+      <div className="container pb-5">
         <div className="row g-5 align-items-center justify-content-start text-start">
           <div className="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
             <div className="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">
