@@ -14,14 +14,14 @@ function CausesPage() {
       <PageHeader pagetitle="Donate" />
       <div className="ac-details mx-auto px-4 py-4 text-white">
         <p className="display-6 py-2 px-4 rounded block mx-auto mb-8">
-          AC Details
+          Account details of Naryan Sewa Trust
         </p>
         <div className="bg-white shadow-md rounded px-8 py-4 text-black">
           <p className="text-lg font-semibold text-center mb-4">
             AC Name - Narayan Sewa Trust
           </p>
           <p className="text-lg font-semibold text-center mb-4">
-            AC No - 4294046239
+            AC No - 42894046239
           </p>
           <p className="text-lg font-semibold text-center mb-4">
             IFSC Code - SBIN0018934
