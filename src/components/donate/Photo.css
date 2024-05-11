@@ -1,0 +1,23 @@
+.custom-photo {
+  width: 21rem; /* 24px converted to rem */
+  height: 29rem; /* 36px converted to rem */
+  object-fit: cover;
+}
+
+.custom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.custom-modal-image {
+  max-height: 100%; /* 25% of the viewport height */
+  max-width: 100%; /* 25% of the viewport width */
+}
