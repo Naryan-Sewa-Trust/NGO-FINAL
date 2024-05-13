@@ -26,7 +26,7 @@ function Header(props) {
 
   useEffect(() => {
     function setFixed() {
-      if (window.scrollY >= 300) {
+      if (window.scrollY >= 250) {
         setSticky(true);
       } else {
         setSticky(false);
