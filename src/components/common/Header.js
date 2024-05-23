@@ -101,6 +101,9 @@ function Header(props) {
             <Link to="/csp" onClick={toggleSideNav}>
               CSP
             </Link>
+            <Link to="/gallery" onClick={toggleSideNav}>
+              Gallery
+            </Link>
             <Link to="/contact" onClick={toggleSideNav}>
               Contact
             </Link>
@@ -168,6 +171,15 @@ function Header(props) {
                 }
               >
                 CSP
+              </Link>
+              <Link
+                to="/gallery"
+                className={
+                  "nav-item nav-link" +
+                  (location.pathname === "/csp" ? " active" : "")
+                }
+              >
+                Gallery
               </Link>
               <Link
                 to="/contact"
