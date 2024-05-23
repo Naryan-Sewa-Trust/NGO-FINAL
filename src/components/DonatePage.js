@@ -13,18 +13,23 @@ function CausesPage() {
       <ToastContainer limit={1} position="bottom-center" />
       <Header />
       <PageHeader pagetitle="Donate" />
-      <div className="container justify-content-between">
+      <div className="container justify-content-between mt-2">
         <div className="row align-items-center">
           {/* <!-- Adjusted column width for better alignment --> */}
-          <div className="col-12 col-md-6 my-4">
-            <div className="grid grid-cols-1 gap-4 py-6">
+          <div className="col-12 col-md-4 mb-4">
+            <div className="grid grid-cols-2 gap-4 py-6">
               <Photo src="img/NarayanSewa.png" alt="Photo 1" />
             </div>
           </div>
+          <div className="col-12 col-md-4 mb-4">
+            <div className="grid grid-cols-2 gap-4 py-6">
+              <Photo src="img/qr.jpg" alt="Photo 1" />
+            </div>
+          </div>
           {/* <!-- Adjusted column width for better alignment --> */}
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-4">
             <div className="ac-details mx-auto px-4 py-4 text-white">
-              <p className="display-6 py-2 px-4 rounded block mx-auto mb-8">
+              <p className="display-8 fw-bold py-2 px-2 rounded block mx-auto mb-8">
                 Account details of Narayan Sewa Trust
               </p>
               <div className="bg-white shadow-md rounded px-8 py-4 text-black">
