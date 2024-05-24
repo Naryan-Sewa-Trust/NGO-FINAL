@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import imageRoutes from "./Router/imageRoutes.js";
 import { default as Razorpay } from "razorpay";
 import crypto from "crypto";
 import bcrypt from "bcrypt";
@@ -21,12 +22,12 @@ app.use(bodyParser.json());
 //   })
 // );
 app.use(express.json());
-// app.use(cors());
-app.use(
-  cors({
-    origin: "https://www.narayansewatrust.in", // replace with the origin of your client app
-  })
-);
+app.use(cors());
+// app.use(
+//   cors({
+//     origin: "https://www.narayansewatrust.in", // replace with the origin of your client app
+//   })
+// );
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
@@ -95,6 +96,10 @@ app.post("/register", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+//Gallery - images add in backend and delete
+// app.use("/api/images", imageRoutes);
+app.use("/api/images", authMiddleware, imageRoutes);
 
 // Add /admin/profile route
 app.put("/admin/profile", authMiddleware, async (req, res) => {
@@ -341,6 +346,6 @@ app.get("/api/getkey", async (req, res) => {
   return res.status(200).json({ key: process.env.KEY });
 });
 
-app.listen(8000, () => {
-  console.log(`Server listening on port no 8000`);
+app.listen(5000, () => {
+  console.log(`Server listening on port no 5000`);
 });

@@ -507,6 +507,10 @@ progress {
   max-width: 100%;
   height: auto;
 }
+.img-size {
+  max-width: 62vh;
+  max-height: 62vh;
+}
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;

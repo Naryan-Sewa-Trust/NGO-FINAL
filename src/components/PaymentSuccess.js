@@ -15,7 +15,7 @@ const PaymentSuccess = () => {
 
     // Fetch receipt URL from backend using payment ID
     // axios
-    //   .get(`http://localhost:8000/api/getreceipturl?paymentId=${paymentId}`)
+    //   .get(`http://localhost:5000/api/getreceipturl?paymentId=${paymentId}`)
     //   .then((response) => {
     //     setReceiptUrl(response.data.receiptUrl);
     //   })
