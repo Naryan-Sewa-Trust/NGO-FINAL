@@ -93,6 +93,16 @@ function Footer() {
                     CSP
                   </Link>
                 </p>
+                <p>
+                  <Link className="btn btn-link" to="/gallery">
+                    Gallery
+                  </Link>
+                </p>
+                <p>
+                  <Link className="btn btn-link" to="/contact">
+                    Contact
+                  </Link>
+                </p>
               </div>
             </div>
             {/* <div className="col-lg-3 col-md-6">

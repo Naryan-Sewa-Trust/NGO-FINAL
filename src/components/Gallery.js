@@ -65,7 +65,10 @@ const Gallery = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/images");
+        // const response = await fetch("http://localhost:5000/api/images");
+        const response = await fetch(
+          "https://ngofinalbackend.vercel.app/api/images"
+        );
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

@@ -14,8 +14,8 @@ function AdminPage() {
     const fetchPayments = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/admin/payments"
-          // "https://ngofinalbackend.vercel.app/admin/payments"
+          // "http://localhost:5000/admin/payments"
+          "https://ngofinalbackend.vercel.app/admin/payments"
         );
         setPayments(response.data.payments);
         // Store data in session storage

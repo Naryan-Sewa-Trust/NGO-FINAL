@@ -142,10 +142,10 @@ const AdminGallery = () => {
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/images");
-      //   const response = await axios.get(
-      //     "https://ngofinalbackend.vercel.app/api/images"
-      //   );
+      //   const response = await axios.get("http://localhost:5000/api/images");
+      const response = await axios.get(
+        "https://ngofinalbackend.vercel.app/api/images"
+      );
       setImages(response.data);
     } catch (error) {
       console.error("Error fetching images:", error);
@@ -160,8 +160,8 @@ const AdminGallery = () => {
       formData.append("file", file);
 
       const res = await axios.post(
-        "http://localhost:5000/api/images",
-        // "https://ngofinalbackend.vercel.app/api/images",
+        // "http://localhost:5000/api/images",
+        "https://ngofinalbackend.vercel.app/api/images",
         formData,
         {
           headers: {
@@ -189,10 +189,8 @@ const AdminGallery = () => {
   };
   const handleImageDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/images/${id}`);
-      //   await axios.delete(
-      // `https://ngofinalbackend.vercel.app/api/images/${id}`
-      //   );
+      //   await axios.delete(`http://localhost:5000/api/images/${id}`);
+      await axios.delete(`https://ngofinalbackend.vercel.app/api/images/${id}`);
       fetchImages(); // Fetch updated list of images after deletion
     } catch (error) {
       console.error("Error deleting image:", error);
