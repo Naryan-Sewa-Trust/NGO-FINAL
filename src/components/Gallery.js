@@ -65,10 +65,10 @@ const Gallery = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        // const response = await fetch("http://localhost:5000/api/images");
-        const response = await fetch(
-          "https://ngofinalbackend.vercel.app/api/images"
-        );
+        const response = await fetch("http://localhost:5000/api/images");
+        // const response = await fetch(
+        //   "https://ngofinalbackend.vercel.app/api/images"
+        // );
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -99,9 +99,9 @@ const Gallery = () => {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error.message}</div>;
+  // }
 
   // Check if images is undefined or not an array
   if (!Array.isArray(images)) {
@@ -130,7 +130,7 @@ const Gallery = () => {
               </div>
             ))
           ) : (
-            <div>No images to display</div>
+            <div className="my-4 ">No images to display</div>
           )}
         </div>
       </div>
