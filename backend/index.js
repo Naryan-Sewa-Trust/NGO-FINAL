@@ -22,7 +22,17 @@ app.use(bodyParser.json());
 //   })
 // );
 app.use(express.json());
-app.use(cors());
+
+const cors = require("cors"); // Ensure you have this line to import the cors package
+
+const corsConfig = {
+  origin: "*",
+  credentials: true, // Corrected property name
+  methods: ["GET", "POST", "PUT", "DELETE"],
+};
+
+app.options("*", cors(corsConfig)); // Corrected path to "*"
+app.use(cors(corsConfig));
 // app.use(
 //   cors({
 //     origin: "https://www.narayansewatrust.in", // replace with the origin of your client app
