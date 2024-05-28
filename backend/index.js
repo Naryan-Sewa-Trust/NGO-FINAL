@@ -23,16 +23,15 @@ app.use(bodyParser.json());
 // );
 app.use(express.json());
 
-const cors = require("cors"); // Ensure you have this line to import the cors package
-
 const corsConfig = {
   origin: "*",
   credentials: true, // Corrected property name
   methods: ["GET", "POST", "PUT", "DELETE"],
 };
 
-app.options("*", cors(corsConfig)); // Corrected path to "*"
+// app.options("*", cors(corsConfig));
 app.use(cors(corsConfig));
+// app.use(cors());
 // app.use(
 //   cors({
 //     origin: "https://www.narayansewatrust.in", // replace with the origin of your client app
@@ -46,7 +45,7 @@ mongoose
     console.log("Connection successful");
   })
   .catch((error) => {
-    console.log(error);
+    console.log("Mongodb connection error: ", error);
   });
 
 const db = mongoose.connection;
@@ -356,6 +355,7 @@ app.get("/api/getkey", async (req, res) => {
   return res.status(200).json({ key: process.env.KEY });
 });
 
-app.listen(5000, () => {
-  console.log(`Server listening on port no 5000`);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
