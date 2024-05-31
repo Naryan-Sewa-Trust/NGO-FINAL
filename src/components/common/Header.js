@@ -176,7 +176,7 @@ function Header(props) {
                 to="/gallery"
                 className={
                   "nav-item nav-link" +
-                  (location.pathname === "/csp" ? " active" : "")
+                  (location.pathname === "/gallery" ? " active" : "")
                 }
               >
                 Gallery

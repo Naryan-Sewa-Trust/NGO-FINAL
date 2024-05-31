@@ -20,10 +20,8 @@ function AdminLoginPage() {
     e.preventDefault();
 
     try {
-      // const response = await axios.post(
-      // "http://localhost:5000/admin/login",
-      // {
       const response = await axios.post(
+        // "http://localhost:5000/admin/login",
         "https://ngo-final.onrender.com/admin/login",
         {
           username,

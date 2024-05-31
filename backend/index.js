@@ -1,43 +1,17 @@
+// app.js
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import imageRoutes from "./Router/imageRoutes.js";
+import Payment from "./Models/paymentModel.js";
 import { default as Razorpay } from "razorpay";
 import crypto from "crypto";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import nodemailer from "nodemailer"; // Import nodemailer for sending emails
+import nodemailer from "nodemailer";
+import adminRoutes from "./Router/adminRoutes.js"; // Import the admin routes
 
 dotenv.config();
-
-const app = express();
-// Middleware to parse JSON bodies
-app.use(bodyParser.json());
-
-// app.use(
-//   cors({
-//     origin: "https://www.narayansewatrust.in",
-//   })
-// );
-app.use(express.json());
-
-const corsConfig = {
-  origin: "*",
-  credentials: true, // Corrected property name
-  methods: ["GET", "POST", "PUT", "DELETE"],
-};
-
-// app.options("*", cors(corsConfig));
-app.use(cors(corsConfig));
-// app.use(cors());
-// app.use(
-//   cors({
-//     origin: "https://www.narayansewatrust.in", // replace with the origin of your client app
-//   })
-// );
-app.use(express.urlencoded({ extended: true }));
 
 mongoose
   .connect(process.env.MONGODB)
@@ -48,166 +22,27 @@ mongoose
     console.log("Mongodb connection error: ", error);
   });
 
-const db = mongoose.connection;
+const app = express();
+app.use(express.json());
+app.use(cors());
+app.use(bodyParser.json());
 
+// Gallery - images add in backend and delete
+app.use("/api/images", imageRoutes);
+
+const db = mongoose.connection;
 app.get("/dbStatus", (req, res) => {
   let status = db.readyState ? "Connected" : "Disconnected";
-  res.send(
-    `Database is currently: ${status} `
-    // `Database is currently: ${status} and ${process.env.MONGODB} and  ${process.env.JWT_SECRET}`
-  );
+  res.send(`Database is currently: ${status}`);
 });
 
-// Middleware to authenticate admin
-const authMiddleware = (req, res, next) => {
-  const token = req.headers.authorization;
-  // console.log(token);
-
-  if (!token) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.adminId = decoded.adminId;
-    next();
-  } catch (error) {
-    res.status(401).json({ message: "Invalid token" });
-  }
-};
-
-// Define admin schema
-const adminSchema = new mongoose.Schema({
-  username: { type: String, unique: true },
-  password: String,
-  isAdmin: { type: Boolean, default: false },
-});
-
-const Admin = mongoose.model("Admin", adminSchema);
-
-// Registration endpoint
-app.post("/register", async (req, res) => {
-  try {
-    const { username, password } = req.body;
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create new admin with isAdmin set to true
-    const admin = await Admin.create({
-      username,
-      password: hashedPassword,
-      isAdmin: true,
-    });
-
-    res.status(201).json({ message: "Admin registered successfully", admin });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
-//Gallery - images add in backend and delete
-// app.use("/api/images", imageRoutes);
-app.use("/api/images", authMiddleware, imageRoutes);
-
-// Add /admin/profile route
-app.put("/admin/profile", authMiddleware, async (req, res) => {
-  try {
-    // Get the new username and password from the request body
-    const { username, password } = req.body;
-
-    // Hash the new password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Update the admin's username and password in the database
-    await Admin.updateOne(
-      { _id: req.adminId },
-      { username, password: hashedPassword }
-    );
-
-    // Send a response back to the client
-    res.status(200).json({ message: "Profile updated successfully" });
-  } catch (error) {
-    console.error("Error updating profile:", error);
-    res.status(500).json({ message: "Error updating profile" });
-  }
-});
-
-// Admin login route
-app.post("/admin/login", async (req, res) => {
-  const { username, password } = req.body;
-  console.log(req.body);
-  // console.log(username, password);
-
-  // Find admin by username
-  const admin = await Admin.findOne({ username });
-
-  if (!admin) {
-    return res.status(404).json({ message: "Admin not found" });
-  }
-
-  // Compare passwords
-  const isMatch = bcrypt.compare(password, admin.password);
-
-  if (!isMatch) {
-    return res.status(401).json({ message: "Invalid credentials" });
-  }
-
-  // Ensure the user is an admin
-  if (!admin.isAdmin) {
-    return res.status(401).json({ message: "User is not an admin" });
-  }
-  // Generate JWT token with a longer expiration time (e.g., 1 day)
-  const token = jwt.sign({ adminId: admin._id }, process.env.JWT_SECRET, {
-    expiresIn: "1d", // Token expires in 1 day
-  });
-  res.json({ token, isAdmin: true });
-});
+// Use the admin routes
+app.use("/admin", adminRoutes);
 
 const instance = new Razorpay({
   key_id: process.env.KEY,
   key_secret: process.env.SECRET,
 });
-
-const paymentschema = new mongoose.Schema(
-  {
-    amount: {
-      type: Number,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    phoneNumber: {
-      type: String,
-      required: true,
-    },
-    description: String,
-    order_id: { type: String },
-    razorpay_order_id: {
-      type: String,
-      default: null,
-    },
-    razorpay_payment_id: {
-      type: String,
-      default: null,
-    },
-    razorpay_signature: {
-      type: String,
-      default: null,
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
-
-const Payment = mongoose.model("Payment", paymentschema);
 
 // Nodemailer configuration
 const transporter = nodemailer.createTransport({
@@ -250,13 +85,13 @@ app.post("/paymentverification", async (req, res) => {
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
     req.body;
   const body = razorpay_order_id + "|" + razorpay_payment_id;
-  const expectedsgnature = crypto
+  const expectedSignature = crypto
     .createHmac("sha256", process.env.SECRET)
     .update(body.toString())
     .digest("hex");
-  const isauth = expectedsgnature === razorpay_signature;
-  //   console.log(expectedsgnature, razorpay_signature, isauth);
-  if (isauth) {
+  const isAuth = expectedSignature === razorpay_signature;
+
+  if (isAuth) {
     const payment = await Payment.findOneAndUpdate(
       { order_id: razorpay_order_id }, // Query filter
       {
@@ -275,20 +110,18 @@ app.post("/paymentverification", async (req, res) => {
       from: process.env.EMAIL_USER,
       to: process.env.ADMIN_EMAIL,
       subject: "New Payment Received",
-      text: `
-    Dear Admin,
+      text: `Dear Admin,
 
-    A new payment has been received from the following donor:
+A new payment has been received from the following donor:
 
-    Name: ${payment.name}
-    Email: ${payment.email}
-    Phone Number: ${payment.phoneNumber}
-    Amount: INR ${payment.amount}
-    Description: ${payment.description}
-    Payment ID: ${razorpay_payment_id}
+Name: ${payment.name}
+Email: ${payment.email}
+Phone Number: ${payment.phoneNumber}
+Amount: INR ${payment.amount}
+Description: ${payment.description}
+Payment ID: ${razorpay_payment_id}
 
-    Thank you.
-  `,
+Thank you.`,
     };
     transporter.sendMail(adminEmailOptions, (error, info) => {
       if (error) {
@@ -303,9 +136,7 @@ app.post("/paymentverification", async (req, res) => {
       from: process.env.EMAIL_USER,
       to: payment.email,
       subject: "Payment Confirmation",
-      // text: `Thank you for your donation of INR ${req.body.amount}. Payment ID: ${razorpay_payment_id}`,
-      text: `
-Dear ${payment.name},
+      text: `Dear ${payment.name},
 
 We are overwhelmed with gratitude for your generous donation of INR ${payment.amount} to Narayan Sewa Trust. Your contribution is a beacon of hope for those in need and a testament to your compassion and kindness towards humanity.
 
@@ -319,8 +150,7 @@ Once again, thank you for your invaluable support. Together, we can create a wor
 
 With heartfelt gratitude,
 
-Narayan Sewa Trust
-`,
+Narayan Sewa Trust`,
     };
     transporter.sendMail(donorEmailOptions, (error, info) => {
       if (error) {
@@ -338,16 +168,6 @@ Narayan Sewa Trust
     // If authentication fails, delete the document corresponding to the razorpay_order_id
     await Payment.findOneAndDelete({ order_id: razorpay_order_id });
     res.status(400).json({ success: false });
-  }
-});
-
-// Protected route to fetch payments (requires authentication)
-app.get("/admin/payments", authMiddleware, async (req, res) => {
-  try {
-    const payments = await Payment.find();
-    res.status(200).json({ success: true, payments });
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
   }
 });
 
