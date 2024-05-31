@@ -27,7 +27,7 @@ const Header = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.put(
-        "https://ngofinalbackend.vercel.app/admin/profile",
+        "https://ngo-final.onrender.com/admin/profile",
         {
           username,
           password,

@@ -4,6 +4,7 @@ import Causes from "./components/CausesPage";
 import Donate from "./components/DonatePage";
 import About from "./components/AboutPage";
 import Contact from "./components/ContactPage";
+import Enquiry from "./components/Enquiry.js";
 import CSP from "./components/CSP_Page";
 import { Routes, Route } from "react-router-dom";
 import PaymentSuccess from "./components/PaymentSuccess.js";
@@ -29,6 +30,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/csp" element={<CSP />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/Enquiry" element={<Enquiry />} />
         <Route path="/paymentsuccess" element={<PaymentSuccess />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/learnmore" element={<LearnMore />} />

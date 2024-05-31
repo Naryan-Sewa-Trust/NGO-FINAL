@@ -103,6 +103,11 @@ function Footer() {
                     Contact
                   </Link>
                 </p>
+                <p>
+                  <Link className="btn btn-link" to="/Enquiry">
+                    Enquiry
+                  </Link>
+                </p>
               </div>
             </div>
             {/* <div className="col-lg-3 col-md-6">
