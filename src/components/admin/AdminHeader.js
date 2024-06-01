@@ -59,13 +59,18 @@ const Header = () => {
   return (
     <div className="pt-2 bg-dark w-full pt-3 pb-3 px-3">
       <div className="mb-md-2 mb-2 d-flex justify-content-between align-items-center">
-        <h1 className="text-md-xxl text-lg text-light">Payment Details</h1>
+        <h1 className="text-md-xxl text-lg text-light">
+          Narayan Sewa Trust - Admin{" "}
+        </h1>
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-basic">
             Options
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
+            <Dropdown.Item as={Link} to="/adminPayment">
+              Payments
+            </Dropdown.Item>
             <Dropdown.Item as={Link} to="/admin-gallery">
               Gallery
             </Dropdown.Item>

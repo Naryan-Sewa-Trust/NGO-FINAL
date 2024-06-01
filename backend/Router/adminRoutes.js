@@ -29,29 +29,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Add /admin/profile route
-router.put("/profile", authMiddleware, async (req, res) => {
-  try {
-    // Get the new username and password from the request body
-    const { username, password } = req.body;
-
-    // Hash the new password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Update the admin's username and password in the database
-    await Admin.updateOne(
-      { _id: req.adminId },
-      { username, password: hashedPassword }
-    );
-
-    // Send a response back to the client
-    res.status(200).json({ message: "Profile updated successfully" });
-  } catch (error) {
-    console.error("Error updating profile:", error);
-    res.status(500).json({ message: "Error updating profile" });
-  }
-});
-
 // Admin login route
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -80,6 +57,29 @@ router.post("/login", async (req, res) => {
     expiresIn: "1d", // Token expires in 1 day
   });
   res.json({ token, isAdmin: true });
+});
+
+// Add /admin/profile route
+router.put("/profile", authMiddleware, async (req, res) => {
+  try {
+    // Get the new username and password from the request body
+    const { username, password } = req.body;
+
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Update the admin's username and password in the database
+    await Admin.updateOne(
+      { _id: req.adminId },
+      { username, password: hashedPassword }
+    );
+
+    // Send a response back to the client
+    res.status(200).json({ message: "Profile updated successfully" });
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ message: "Error updating profile" });
+  }
 });
 
 // Protected route to fetch payments (requires authentication)

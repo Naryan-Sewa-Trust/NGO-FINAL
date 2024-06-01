@@ -55,6 +55,7 @@ function AdminPage() {
       }}
     >
       <AdminHeader />
+      <h1 className="text-center mb-4 text-gray-800">Payment Details</h1>
       <animated.div className=" w-responsive overflow-scroll">
         <div className="w-responsive">
           <table className="table table-striped w-responsive">
