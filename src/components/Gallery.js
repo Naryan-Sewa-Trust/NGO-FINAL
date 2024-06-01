@@ -17,7 +17,8 @@ const Gallery = () => {
     try {
       // const response = await axios.get("http://localhost:5000/api/images/");
       const response = await axios.get(
-        "https://ngo-final.onrender.com/api/images"
+        // "https://ngo-final.onrender.com/api/images"
+        "https://ngo-final-3zvw.onrender.com/api/images"
       );
 
       // if (response.status !== 200) {

@@ -19,7 +19,8 @@ const AdminGallery = () => {
     try {
       // const response = await axios.get("http://localhost:5000/api/images");
       const response = await axios.get(
-        "https://ngo-final.onrender.com/api/images"
+        // "https://ngo-final.onrender.com/api/images"
+        "https://ngo-final-3zvw.onrender.com/api/images"
       );
       setImages(response.data);
     } catch (error) {
@@ -36,7 +37,8 @@ const AdminGallery = () => {
 
       const res = await axios.post(
         // "http://localhost:5000/api/images",
-        "https://ngo-final.onrender.com/api/images",
+        // "https://ngo-final.onrender.com/api/images",
+        "https://ngo-final-3zvw.onrender.com/api/images",
         formData,
         {
           headers: {
@@ -65,7 +67,10 @@ const AdminGallery = () => {
   const handleImageDelete = async (id) => {
     try {
       // await axios.delete(`http://localhost:5000/api/images/${id}`);
-      await axios.delete(`https://ngo-final.onrender.com/api/images/${id}`);
+      // await axios.delete(`https://ngo-final.onrender.com/api/images/${id}`);
+      await axios.delete(
+        `https://ngo-final-3zvw.onrender.com/api/images/${id}`
+      );
       fetchImages(); // Fetch updated list of images after deletion
     } catch (error) {
       console.error("Error deleting image:", error);

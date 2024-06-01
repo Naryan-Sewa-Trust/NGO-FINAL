@@ -31,7 +31,8 @@ function Donate() {
       const {
         data: { key },
         // } = await axios.get("http://localhost:5000/api/getkey");
-      } = await axios.get("https://ngo-final.onrender.com/api/getkey");
+        // } = await axios.get("https://ngo-final.onrender.com/api/getkey");
+      } = await axios.get("https://ngo-final-3zvw.onrender.com/api/getkey");
 
       // Extract order details
       // const {
@@ -40,7 +41,8 @@ function Donate() {
 
       const {
         data: { order },
-      } = await axios.post("https://ngo-final.onrender.com/checkout", {
+      } = await axios.post("https://ngo-final-3zvw.onrender.com/checkout", {
+        // } = await axios.post("https://ngo-final.onrender.com/checkout", {
         // } = await axios.post("http://localhost:5000/checkout", {
         amount,
         name,
@@ -58,7 +60,8 @@ function Donate() {
         image:
           "https://tse2.mm.bing.net/th?id=OIP.76kbZ0BRMI_eAnFgvsNWUAHaEO&pid=Api&P=0&h=180",
         order_id: order.id,
-        callback_url: "https://ngo-final.onrender.com/paymentverification",
+        callback_url: "https://ngo-final-3zvw.onrender.com/paymentverification",
+        // callback_url: "https://ngo-final.onrender.com/paymentverification",
         // callback_url: "http://localhost:5000/paymentverification",
         prefill: {
           name,

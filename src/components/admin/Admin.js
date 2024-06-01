@@ -15,7 +15,8 @@ function AdminPage() {
       try {
         const response = await axios.get(
           // "http://localhost:5000/admin/payments"
-          "https://ngo-final.onrender.com/admin/payments"
+          // "https://ngo-final.onrender.com/admin/payments"
+          "https://ngo-final-3zvw.onrender.com/admin/payments"
         );
         setPayments(response.data.payments);
         // Store data in session storage
