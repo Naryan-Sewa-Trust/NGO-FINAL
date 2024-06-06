@@ -210,6 +210,44 @@ function Causes() {
             <div className="causes-item d-flex flex-column bg-light border-top border-5 border-primary rounded-top overflow-hidden h-100">
               <div className="text-center p-4 pt-0">
                 <div className="d-inline-block bg-primary text-white rounded-bottom fs-5 pb-1 px-3 mb-4">
+                  <small>Take Care</small>
+                </div>
+                <h5 className="mb-3">A Beacon of Hope for the Elderly</h5>
+                <p>
+                  Our NGO, believe in the sanctity and dignity of every human
+                  life, especially those who have spent their years nurturing
+                  and caring for others.
+                </p>
+              </div>
+              <div className="position-relative mt-auto">
+                <img
+                  className="img-fluid"
+                  src="images/old.jpg"
+                  alt="Take Care"
+                  style={{ objectFit: "cover", width: "100%", height: "40vh" }}
+                />
+                <div className="causes-overlay">
+                  <Link
+                    className="btn btn-outline-primary"
+                    to="/learnmore"
+                    state={{
+                      title: " A Beacon of Hope for the Elderly",
+                      img: "images/skill.jpg",
+                    }}
+                  >
+                    Read More
+                    <div className="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                      <i className="fa fa-arrow-right"></i>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+            <div className="causes-item d-flex flex-column bg-light border-top border-5 border-primary rounded-top overflow-hidden h-100">
+              <div className="text-center p-4 pt-0">
+                <div className="d-inline-block bg-primary text-white rounded-bottom fs-5 pb-1 px-3 mb-4">
                   <small>Empowerment</small>
                 </div>
                 <h5 className="mb-3">Skill Development</h5>
@@ -243,7 +281,7 @@ function Causes() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
