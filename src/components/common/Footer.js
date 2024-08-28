@@ -141,7 +141,7 @@ function Footer() {
                   Teksila
                 </a> */}
                 <a
-                  href="tel:7428376300"
+                  href="tel:7970693331"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
