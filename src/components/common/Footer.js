@@ -137,8 +137,15 @@ function Footer() {
               </div>
               <div className="col-md-6 text-center text-md-end">
                 Developed By{" "}
-                <a href="https://www.teksila.in/" target="_blank">
+                {/* <a href="https://www.teksila.in/" target="_blank">
                   Teksila
+                </a> */}
+                <a
+                  href="tel:7428376300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Tanmay and Team
                 </a>
               </div>
             </div>
